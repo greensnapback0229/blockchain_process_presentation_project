@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blockchain
+    username: root
+    password: 12345678
+
+  mustache:
+    prefix: classpath:/templates/
+    suffix: .mustache
+server:
+  servlet:
+    encoding:
+      force-response: true
