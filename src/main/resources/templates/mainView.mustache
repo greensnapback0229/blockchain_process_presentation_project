@@ -1,0 +1,26 @@
+{{>layout/header}}
+<style>
+    .vertical-center {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<div class="container vertical-center">
+        <div class="col"></div>
+        <div class="col text-center">
+            <img src="/catholicCoinLogo.png"> <br>
+            <p class="fs-1">미발문 코인</p> <br>
+            <small>블록체인 지갑을 만들어주세요</small> <br>
+            <div class="input-group mb-1">
+                <input type="text" class="form-control" placeholder="Recipient's username" id="wallet-name">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="btn-register">Button</button>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+</div>
+
+{{>layout/footer}}
