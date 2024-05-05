@@ -1,0 +1,22 @@
+{{>layout/header}}
+
+<div class="mx-auto" style="width: 300px">
+    <h1 class="font-weight-bold" id="wallet-title">💰 ***님 지갑</h1>
+    <h5 class="font-weigth-bold" id="current-asset"> 5000 mibal</h5>
+    <div class="input-group mb-3">
+        <input type="text" id="sender-name" class="form-control" placeholder="지갑이름">
+        <span class="input-group-text border-dark">님에게</span> <br>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" id="amount" class="form-control" placeholder="송금액">
+        <button class="btn btn btn-outline-dark" id="send-money">mibal 송금</button>
+    </div>
+    <br>
+    <br>
+    <h1 class="font-weight-bold" id="trade-ledger">📜 거래 장부</h1>
+    <button type="button" id="mining-btn" class="btn btn-outline-dark">⛏ Mining(채굴)</button>
+    <br>
+    <h5>현재 n명 참여중!</h5>
+</div>
+
+{{>layout/footer}}

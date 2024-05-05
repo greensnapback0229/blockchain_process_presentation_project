@@ -21,11 +21,16 @@ var main = {
                 wallet_name = res.wallet_name;
                 alert(res.wallet_name);
                 alert("등록됨");
+                window.location.href = "/wallet"
+
             },
             error:function (res){
                 alert("지갑명이 길거나 이미 등록되었습니다.");
             }
         });
+    },
+    connect : function(){
+
     }
 };
 main.init();
