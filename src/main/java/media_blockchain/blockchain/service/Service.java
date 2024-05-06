@@ -131,7 +131,7 @@ public class Service {
 	}
 
 
-	public Boolean isChainValid() {
+	/*public Boolean isChainValid() {
 		Block currentBlock;
 		Block previousBlock;
 		String hashTarget = new String(new char[difficulty]).replace('\0', '0');
@@ -158,7 +158,7 @@ public class Service {
 
 		}
 		return true;
-	}
+	}*/
 
 	public void addBlock(Block newBlock) {
 		newBlock.mineBlock(difficulty);
