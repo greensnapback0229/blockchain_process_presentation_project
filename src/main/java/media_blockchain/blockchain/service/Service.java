@@ -40,7 +40,7 @@ public class Service {
 
 	@PostConstruct
 	public void init(){
-		addBlock(new Block("initial block", "0"));
+		//addBlock(new Block("initial block", "0"));
 	}
 
 	public void sendMoney(SendMoneyMessage message){
@@ -160,10 +160,10 @@ public class Service {
 		return true;
 	}*/
 
-	public void addBlock(Block newBlock) {
+	/*public void addBlock(Block newBlock) {
 		newBlock.mineBlock(difficulty);
 		blockchain.add(newBlock);
-	}
+	}*/
 
 
 	private String[] extractData(String transactionString) {
