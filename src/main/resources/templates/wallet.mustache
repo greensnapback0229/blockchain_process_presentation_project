@@ -1,22 +1,56 @@
 {{>layout/header}}
-
 <div class="mx-auto" style="width: 300px">
-    <h1 class="font-weight-bold" id="wallet-title">💰 ***님 지갑</h1>
+    <h1 class="font-weight-bold" id="wallet-title">💰 {{walletName}}님 지갑</h1>
     <h5 class="font-weigth-bold" id="current-asset"> 5000 mibal</h5>
     <div class="input-group mb-3">
-        <input type="text" id="sender-name" class="form-control" placeholder="지갑이름">
+        <input type="text" id="receiver-name" class="form-control" placeholder="지갑이름">
         <span class="input-group-text border-dark">님에게</span> <br>
     </div>
     <div class="input-group mb-3">
         <input type="text" id="amount" class="form-control" placeholder="송금액">
-        <button class="btn btn btn-outline-dark" id="send-money">mibal 송금</button>
+        <button type="button" class="btn btn btn-outline-dark" id="send-money">mibal 송금</button>
     </div>
     <br>
     <br>
     <h1 class="font-weight-bold" id="trade-ledger">📜 거래 장부</h1>
-    <button type="button" id="mining-btn" class="btn btn-outline-dark">⛏ Mining(채굴)</button>
+    <button type="button" id="mine-list-btn" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        ⛏ Mining(채굴)
+    </button>
     <br>
     <h5>현재 n명 참여중!</h5>
+    <div id="ledger">
+
+    </div>
 </div>
 
-{{>layout/footer}}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="table-container" class="table tables-sm">
+
+                </table>
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/js/app/main.js"></script>
+<script src="/js/app/wallet.js"></script>
+
+</body>
+</html>

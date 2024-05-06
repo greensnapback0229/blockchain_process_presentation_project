@@ -1,5 +1,7 @@
 package media_blockchain.blockchain.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +20,5 @@ public class MiningResMessage {
 	int senderAssert;
 	int receiverAssert;
 	int minerAssert;
-
+	List<String> ledger;
 }

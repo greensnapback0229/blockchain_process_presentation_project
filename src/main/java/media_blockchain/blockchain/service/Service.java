@@ -19,6 +19,7 @@ import media_blockchain.blockchain.Blockchain.Block;
 import media_blockchain.blockchain.dto.MiningReq;
 import media_blockchain.blockchain.dto.MiningRes;
 import media_blockchain.blockchain.dto.MiningResMessage;
+import media_blockchain.blockchain.dto.NotMinedRes;
 import media_blockchain.blockchain.dto.RegisterDto;
 import media_blockchain.blockchain.dto.AddWalletMessage;
 import media_blockchain.blockchain.dto.SendMoneyMessage;
@@ -52,6 +53,17 @@ public class Service {
 		System.out.println("Request-송금: " + data + "/code : " + notMinedCode);
 	}
 
+	public ResponseEntity getNotMined(){
+		NotMinedRes notMindedRes = new NotMinedRes();
+		notMindedRes.setNotMindedData(new ArrayList<String>());
+		notMindedRes.setNotMindedCode(new ArrayList<String>());
+		for(Map.Entry<String, String> notMined : notMined.entrySet()){
+			notMindedRes.getNotMindedCode().add(notMined.getKey());
+			notMindedRes.getNotMindedData().add(notMined.getValue());
+		}
+		return new ResponseEntity(notMindedRes, HttpStatus.OK);
+	}
+
 	public ResponseEntity miningBlock(MiningReq req){
 		MiningRes res;
 		System.out.println("[mining-request] - " + req.getNotMinedCode());
@@ -63,7 +75,7 @@ public class Service {
 			return new ResponseEntity<>(res,HttpStatus.BAD_REQUEST);
 		}
 		else{
-			String[] extract = extractData(req.getData());
+			String[] extract = extractData(notMined.get(req.getNotMinedCode()));
 			String senderName = extract[0];
 			int amount = Integer.parseInt(extract[1]);
 			String receiverName = extract[2];
@@ -74,10 +86,12 @@ public class Service {
 			//채굴 과정 추가
 			String miningMessage = "[채굴] " + req.getMinerName() + " + 500mc";
 			ledger.add(miningMessage);
-			ledger.add(req.getData());
+			ledger.add(notMined.get(req.getNotMinedCode()));
+
+			notMined.remove(req.getNotMinedCode());
 
 			MiningResMessage message = MiningResMessage.builder()
-				.newBlockMessage(req.getData())
+				.newBlockMessage(notMined.get(req.getNotMinedCode()))
 				.miningMessage(miningMessage)
 				.senderName(senderName)
 				.senderAssert(wallets.get(senderName).getAssert())
@@ -85,6 +99,7 @@ public class Service {
 				.receiverAssert(wallets.get(receiverName).getAssert())
 				.minerName(req.getMinerName())
 				.minerAssert(wallets.get(req.getMinerName()).getAssert())
+				.ledger(ledger)
 				.build();
 
 			System.out.println(miningMessage + message);
@@ -98,20 +113,20 @@ public class Service {
 		WalletDto walletDto = new WalletDto(message.getName(), 5000);
 		wallets.put(message.getName(), walletDto);
 
-		for(Map.Entry<String, WalletDto> wallet : wallets.entrySet()){
-			System.out.println("[add-wallet-request] - " + wallet.getValue());
-		}
+
 	}
 
 	public ResponseEntity registerService(RegisterDto dto){
-		if(dto.getWalletName().length() >= 5) return new ResponseEntity(HttpStatus.BAD_REQUEST);
-
+		if(dto.getWalletName().length() > 10) return new ResponseEntity(HttpStatus.BAD_REQUEST);
 		for(WalletDto wallet : wallets.values()){
+			System.out.println("current: "  + wallet.getName());
 			if(wallet.getName().equals(dto.getWalletName())){
 				return new ResponseEntity(HttpStatus.BAD_REQUEST);
 			}
 		}
-		System.out.println(dto.getWalletName());
+		WalletDto walletDto = new WalletDto(dto.getWalletName(), 5000);
+		wallets.put(dto.getWalletName(), walletDto);
+		System.out.println("[wallet register req]"+ dto.getWalletName());
 		return new ResponseEntity<>(new RegisterDto(dto.getWalletName()), HttpStatus.OK);
 	}
 

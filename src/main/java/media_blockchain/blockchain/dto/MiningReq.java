@@ -6,7 +6,7 @@ import lombok.Data;
 public class MiningReq {
 	String minerName;
 
-	String data;
+	//String data;
 
 	String notMinedCode;
 }
