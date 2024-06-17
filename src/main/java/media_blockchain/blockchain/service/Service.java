@@ -117,7 +117,14 @@ public class Service {
 	}
 
 	public ResponseEntity registerService(RegisterDto dto){
+		String regex = "^[a-zA-Z]{1,10}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(dto.getWalletName());
+		if(!matcher.matches()){
+			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
 		if(dto.getWalletName().length() > 10) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
 		for(WalletDto wallet : wallets.values()){
 			System.out.println("current: "  + wallet.getName());
 			if(wallet.getName().equals(dto.getWalletName())){

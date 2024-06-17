@@ -1,5 +1,5 @@
 var stompClient = null;
-var stompServerUrl = "ws://localhost:8080/sock/conn";
+var stompServerUrl = "ws://13.54.41.253:8080/sock/conn";
 var walletName;
 var main = {
     init : function() {
@@ -40,13 +40,14 @@ var main = {
         }
         var sendMoneyJson = JSON.stringify(sendMoneyData);
         sendMessage("/app/send-money", sendMoneyJson);
+        alert("송금완료 채굴을 기다립니다.");
     },
     miningWindow : function (){
         getNotMined();
     },
     miningBlockFunc : function(code){
         var notMinedCode = code;
-        alert(notMinedCode);
+        //alert(notMinedCode);
         var miningReq = {
             "minerName" : walletName,
             "notMinedCode" : notMinedCode
